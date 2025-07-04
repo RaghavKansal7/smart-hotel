@@ -29,15 +29,14 @@ public class SecurityConfig {
         return authConfig.getAuthenticationManager();
     }
 
-    // ✅ Security rules
+    // ✅ Security Filter Chain - Allow All Access Temporarily
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
 
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/register", "/css/", "/js/").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll() // ✅ Allow everything (for Railway access)
                 )
                 .formLogin(form -> form.disable()) // using custom login controller
                 .logout(logout -> logout
@@ -48,5 +47,4 @@ public class SecurityConfig {
 
         return http.build();
     }
-
 }
