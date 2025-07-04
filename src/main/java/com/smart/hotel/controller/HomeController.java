@@ -18,7 +18,7 @@ public class HomeController {
 
     public String home() {
 
-        return "home"; // looks for home.html in src/main/resources/templates
+        return "redirect:/login";
 
     }
 
